@@ -1,0 +1,15 @@
+apiVersion: operator.serverless.openshift.io/v1alpha1
+kind: KnativeKafka
+metadata:
+  name: knative-kafka
+  namespace: knative-eventing
+spec:
+  channel:
+    authSecretName: ""
+    authSecretNamespace: ""
+    bootstrapServers:   bcg-kafka-bootstrap.ac13ae-dev.svc:9092  # USE KAFKA BOOTSTRAP SVC ENDPOINT, for example 'bcg-kafka-bootstrap.user1.svc:9092'
+    enabled: true
+  high-availability:
+    replicas: 1
+  source:
+    enabled: true
