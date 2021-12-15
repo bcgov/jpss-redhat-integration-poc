@@ -21,17 +21,36 @@ This POC project will use the following Red Hat Integration Tools to implement:
 - Compute: Camel K
 - Event Broker: Red Hat AMQ Streams (Kafka)
 - Service and Schema Registry: Red Hat Service Registry (Apicur.io)
-- API Management: 3scale
 
 ## Considerations
   - [Apache Kafka Architecture - Delivery Guarantees](https://supergloo.com/kafka/kafka-architecture-delivery/)
     - at most once - which can lead to messages being lost, but they cannot be redelivered or duplicated
     - at least once - ensures messages are never lost but may be duplicated
     - exactly once - guarantees each message processing (not delivery) happens once and only once
+  - [Should You Put Several Event Types in the Same Kafka Topic?](https://www.confluent.io/blog/put-several-event-types-kafka-topic/)
 
 # Reference Repos
-- [https://github.com/gnunn1/seating-manifests](https://github.com/gnunn1/seating-manifests)
-- [Git Hub Repo: Camel K Example Kafka by Evan Zhang](https://github.com/rhtevan/camel-k-example-kafka) - This demonstrates how to use Service Registry to serialize and deserialize events in a given topic
+- [GitHub Repo: Seating Manifests by Gerald Nunn](https://github.com/gnunn1/seating-manifests)
+- [GitHub Repo: Camel K: Event Streaming Example (Discussed at POC kick off)](https://github.com/openshift-integration/camel-k-example-event-streaming/tree/1.4.x)
+- [GitHub Gist: OCP Serverless | Knative - Demo Scripts by Evan Zhang](https://gist.github.com/rhtevan/aeeedf4d3037f5c605e94179ddf6f5e1)
+- [GitHub Repo: OpenShift Integration/camel-k-example-basic](https://github.com/openshift-integration/camel-k-example-basic/blob/main/readme.didact.md)
+- [GitHub Repo: Apache Camel K - Kafka Example](https://github.com/apache/camel-k/tree/main/examples/kafka)
+- [GitHub Repo: Camel K Example Kafka by Evan Zhang](https://github.com/rhtevan/camel-k-example-kafka) - This demonstrates how to use Service Registry to serialize and deserialize events in a given topic
+
+# Fun / Useful Demos
+- [Building a contact form API with Apache Camel and Quarkus - by Tom Donohue](https://tomd.xyz/camel-quarkus-contact-form/)
+
+# Kafkacat usage
+
+<pre>
+oc run kafkacat -it --rm --restart=Never --image=edenhill/kafkacat:1.6.0 --command – /bin/sh
+
+alias kafkacat='oc exec kafkacat -it -- kafkacat'
+
+kafkacat -b bcg-kafka-bootstrap:9092 -t my-topic -P 
+</pre>
+
+Note: Need to run this in Linux (not Git Bash)
 
 
 # POC Scope
