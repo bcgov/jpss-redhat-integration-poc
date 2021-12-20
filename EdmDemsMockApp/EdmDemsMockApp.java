@@ -10,6 +10,11 @@ import org.apache.camel.builder.RouteBuilder;
 public class EdmDemsMockApp extends RouteBuilder {
   @Override
   public void configure() throws Exception {
-    from("platform-http:/hello?httpMethodRestrict=GET").setBody(simple("Hello ${header.name} from ${header.from}"));
+
+    // https://camel.apache.org/components/next/eips/delay-eip.html
+    from("platform-http:/createCourtFile?httpMethodRestrict=GET")
+    .delay(3000)
+    .setBody(simple("Court file '${header.number}' processed successfully after 3 seconds."))
+    .to("log:info");
   }
 }
