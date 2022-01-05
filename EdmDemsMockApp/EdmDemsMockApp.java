@@ -13,6 +13,7 @@ public class EdmDemsMockApp extends RouteBuilder {
 
     // https://camel.apache.org/components/next/eips/delay-eip.html
     from("platform-http:/createCourtFile?httpMethodRestrict=GET")
+    .routeId("createCourtFile")
     .delay(3000)
     .setBody(simple("Court file '${header.number}' processed successfully after 3 seconds."))
     .to("log:info");
