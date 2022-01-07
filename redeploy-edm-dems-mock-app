@@ -1,0 +1,2 @@
+kamel delete edm-dems-mock-app
+kamel run EdmDemsMockApp/EdmDemsMockApp.java --profile openshift
