@@ -1,0 +1,2 @@
+kamel delete ccm-justin-mock-app
+kamel run CcmJustinMockApp/CcmJustinMockApp.java --profile openshift
