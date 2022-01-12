@@ -1,2 +1,0 @@
-kamel delete edm-justin-mock-app
-kamel run EdmJustinMockApp/EdmJustinMockApp.java --profile openshift

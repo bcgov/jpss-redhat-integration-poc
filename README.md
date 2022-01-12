@@ -47,10 +47,10 @@ oc run kafkacat -it --rm --restart=Never --image=edenhill/kafkacat:1.6.0 --comma
 
 alias kafkacat='oc exec kafkacat -it -- kafkacat'
 
-kafkacat -b bcg-kafka-bootstrap:9092 -t my-topic -P 
+kafkacat -b cmn-kafka-kafka-bootstrap:9092 -t my-topic -C 
 </pre>
 
-Note: Need to run this in Linux (not Git Bash)
+Note: Need to run this in a real Linux shell; e.g. a Windows Subsystem for Linux (WSL) session, rather than a Git Bash (emulation) session
 
 
 # POC Scope
@@ -62,10 +62,10 @@ This POC will implement a simple set of evidance and disclosure management servi
 
 
 # Components
-- edm-justin-mock-app
-- edm-justin-utility-adapter
-- edm-notification-service
-- edm-lookup-service
-- edm-dems-edge-adapter
-- edm-dems-mock-app
+- ccm-justin-mock-app
+- ccm-justin-utility-adapter
+- ccm-notification-service
+- ccm-lookup-service
+- ccm-dems-edge-adapter
+- ccm-dems-mock-app
 - cmn-kafka

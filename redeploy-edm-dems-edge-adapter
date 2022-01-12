@@ -1,2 +1,0 @@
-kamel delete edm-dems-edge-adapter
-kamel run EdmDemsEdgeAdapter/EdmDemsEdgeAdapter.java --property file:EdmDemsEdgeAdapter/application.properties --profile openshift

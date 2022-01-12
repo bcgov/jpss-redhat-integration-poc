@@ -1,2 +1,0 @@
-kamel delete edm-justin-utility-adapter
-kamel run EdmJustinUtilityAdapter/EdmJustinUtilityAdapter.java --property file:EdmJustinUtilityAdapter/application.properties --profile openshift

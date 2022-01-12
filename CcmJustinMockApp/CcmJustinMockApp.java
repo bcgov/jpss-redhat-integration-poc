@@ -1,15 +1,18 @@
 // To run this integration in OpenShift in server mode, use:
-// kamel run EdmJustinMockApp.java --profile openshift
+// kamel run CcmJustinMockApp.java --profile openshift
 //
 // Add '--dev' to run in dev mode
 // 
-// curl -H "number:1234" http://<service-location>/createCourtFile
+// curl http://ccm-justin-mock-app/courtFileCreated?number=1
 //
 
+import java.util.Calendar;
+
 import org.apache.camel.Exchange;
+import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 
-public class EdmJustinMockApp extends RouteBuilder {
+public class CcmJustinMockApp extends RouteBuilder {
   @Override
   public void configure() throws Exception {
     // from("platform-http:/createCourtFile?httpMethodRestrict=GET")
@@ -28,12 +31,21 @@ public class EdmJustinMockApp extends RouteBuilder {
     //.to("http://edm-dems-mock-app/createCourtfile?number=${header.number}");
     // test comment
     .setProperty("number").simple("${header.number}")
-    .setBody().simple("{'number': '${exchangeProperty.number}', 'file_type': 'court'}")
+    .process(new Processor() {
+      public void process(Exchange ex) {
+        // https://stackoverflow.com/questions/12008472/get-and-format-yesterdays-date-in-camels-expression-language
+        Calendar createdCal = Calendar.getInstance();
+        createdCal.add(Calendar.DATE, 0);
+        ex.getIn().setHeader("created_datetime", createdCal.getTime());
+      }
+    })
+    //.setBody().simple("{'number': '${exchangeProperty.number}', 'created_datetime': '${date:header.created_datetime:yyyy-mm-dd}', 'approved_datetime': '${date:header.approved_datetime:yyyy-mm-dd}'}")
+    .setBody().simple("{\"number\": \"${exchangeProperty.number}\", \"created_datetime\": \"${date:header.created_datetime:yyyy-MM-dd'T'HH:mm:ssX}\"}")
     //.to("rest:get:/createCourtFile?number=${header.number}")
     // https://camel.apache.org/manual/faq/how-to-send-the-same-message-to-multiple-endpoints.html
     //.multicast().to("http://edm-justin-utility-adapter/courtFileCreated?number=${header.number}", "http://edm-dems-mock-app/createCourtFile?number=${header.number}")
     .setHeader(Exchange.HTTP_METHOD, simple("POST"))
-    .to("http://edm-justin-utility-adapter/courtFileCreated")
-    .log("{'court_file_number': '${exchangeProperty.number}'}");
+    .to("http://ccm-justin-utility-adapter/courtFileCreated")
+    .log("Newly generated court file: ${body}");
   }
 }

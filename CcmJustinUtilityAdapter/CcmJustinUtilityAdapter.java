@@ -1,21 +1,19 @@
 // To run this integration use:
-// kamel run EdmJustinUtilityAdapter.java --property file:application.properties --profile openshift
+// kamel run CcmJustinUtilityAdapter.java --property file:application.properties --profile openshift
 // 
 // recover the service location. If you're running on minikube, minikube service platform-http-server --url=true
-// curl -H "name:World" http://<service-location>/hello
+// curl -d '{}' http://ccm-justin-utility-adapter/courtFileCreated
 //
 
 // camel-k: language=java
 // camel-k: dependency=mvn:org.apache.camel.quarkus:camel-quarkus-kafka
 
-import org.apache.camel.Exchange;
+//import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 
-public class EdmJustinUtilityAdapter extends RouteBuilder {
+public class CcmJustinUtilityAdapter extends RouteBuilder {
   @Override
   public void configure() throws Exception {
-    log.info("About to start courtFileCreated route.");
-
     from("platform-http:/courtFileCreated?httpMethodRestrict=POST")
     .routeId("courtFileCreated")
     //.setHeader(Exchange.HTTP_METHOD, simple("GET"))
@@ -25,18 +23,21 @@ public class EdmJustinUtilityAdapter extends RouteBuilder {
     .removeHeaders("CamelHttp*")
     //.to("http://edm-dems-mock-app/createCourtfile?number=${header.number}");
     // test comment
-    .transform()
-    .simple("${header.number}")
+    //
+    .log("body (before unmarshalling): '${body}'")
+    .unmarshal().json()
+    .transform(simple("{\"number\": \"${body[number]}\", \"status\": \"created\", \"created_datetime\": \"${body[created_datetime]}\"}"))
+    .log("body (after unmarshalling): '${body}'")
+    //.log("body.court_file_number: '${body.court_file_number}'")
     //.to("rest:get:/createCourtFile?number=${header.number}")
     // https://camel.apache.org/manual/faq/how-to-send-the-same-message-to-multiple-endpoints.html
     //.multicast().to("http://edm-dems-edge-adapter/courtFileCreated?number=${header.number}", "kafka:{{kafka.topic.name}}")
-    .to("kafka:{{kafka.topic.name}}")
-    .log("{'court_file_number': '${header.number}'}");
+    .to("kafka:{{kafka.topic.name}}");
   }
 }
 
-/*
-[1] 2021-12-14 08:22:24,348 ERROR [org.apa.cam.qua.mai.CamelMainRuntime] (main) Failed to start application: org.apache.camel.RuntimeCamelException: java.lang.IllegalArgumentException: Cannot find RoutesBuilderLoader in classpath supporting file extension: EdmJustinUtilityAdapter.java
-[1] 	at org.apache.camel.RuntimeCamelException.wrapRuntimeCamelException(RuntimeCamelException.java:51)
-[1] 	at org.apache.camel.k.support.SourcesSupport.load(SourcesSupport.java:172)
-*/
+// https://stackoverflow.com/questions/40756027/apache-camel-json-marshalling-to-pojo-java-bean
+class CourtCaseCreated {
+  public String number;
+  public String created_datetime;
+}
