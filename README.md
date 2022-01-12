@@ -60,6 +60,28 @@ This POC will implement a simple set of court case management (CCM) services.  S
 - Notification Service
 - Lookup Service
 
+# POC System Context Diagram
+
+Below is the system context diagram for the DEMS Integration POC where the following event-based solution is implemented using Red Hat Integration toolkit:
+
+- **Actors**
+  - JUSTIN System
+  - DEMS User
+
+- **Events / Commands**
+  - Court Case Created
+  - Get Court Case Details
+
+- **Domain Services**
+  - Notification Service
+  - Lookup Service
+
+- **Event Topics**
+  - Court Cases
+  - KPIs (no personal information)
+  - Audits
+
+![](/img/system_context_diagram.png)
 
 # Integration Components Included in the POC
 

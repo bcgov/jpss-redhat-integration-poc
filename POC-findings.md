@@ -1,7 +1,7 @@
 # Benefits with Red Hat Integration
     1. Automation
         - Operator-assisted deployments and run time
-    2. Packaging
+    2. Just Integration Code (Packaging and Deployment Managed Separately)
         - Low code integration with microservice benefits - based on 3rd
           generation Apache Camel framework (able to develop and deploy
           microservices without the overhead that goes into creating
@@ -10,9 +10,9 @@
         - Built on best-of-breed open source solutions
     4. No Vendor Lock-In / Hybrid Friendly
         - Based on a set of integration building blocks that can co-exist 
-          or replaced with alternative solutions
+          or be replaced with alternative solutions
           E.g. Implementing an API catalog using DataBC's Kong API Gateway instead of Red Hat's 3scale Gateway
-    5. Agile Integration Solution and Support
+    5. Agile Integration Stack and Support
         - Best practice design and implementation of agile integration
             - Data Integration
             - Application Integration
@@ -25,7 +25,7 @@
         - Natural support for domain-based integration (aka API first design)
         - Reusable integration by adding new event producers, event consumers, and event processors
     6. OpenShift Friendly
-        - Out of the box compatibility with OpenShift
+        - Out of the box native support for OpenShift
         - Ready to deploy into traditional virtual machines
     7. Enterprise Support
         - Access to Red Hat support
@@ -35,11 +35,18 @@
         - Several integration operators and components have only recently become generally available (GA) and are going through the product hardening process, when compared to more mature Red Hat products
         - Not ready to operate in serverless mode in BC Gov OpenShift Container Platform (yet) due to missing multi-tenancy support
     2. Lacking Centralized Documentation
-        - The nature of building the integration suite on open source projects means that the documentation is naturally more scattered and varied (multiple versions).  This leads to higher initial learning curve to leverage / fine tune integration components
-           E.g. managing kamel traits through -t parameter or profiles through the --profile parameter
+        - The nature of building the integration suite on open source   
+            projects means that the documentation is naturally more scattered and varied (multiple versions).  This leads to higher initial learning curve to leverage / fine tune integration components
+                E.g. managing kamel traits through -t parameter or profiles through the --profile parameter
 
 # Impacts
-    1. Platform team dependencies (what to install and manage)
+    1. Leading Edge Technology
+        - Some integration toolkits are either only recently became 
+          generally available (GA) or are still in technical preview.
+    2. Lacking Centralized Documentation
+        - While Red Hat has provided much documentation on their developer 
+          site, the fact is, each open source project leveraged by the integration toolkit has its own documentation and versioning.  This adds to the complexity and learning curve for new integration developers and architects.
+
     
 # Analysis Report Table of Contents
 - Recommendation from the Integration Delivery Services Team

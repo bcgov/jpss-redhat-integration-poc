@@ -40,7 +40,6 @@ public class CcmLookupService extends RouteBuilder {
     //.to("rest:get:/createCourtFile?number=${header.number}")
     // https://camel.apache.org/manual/faq/how-to-send-the-same-message-to-multiple-endpoints.html
     //.multicast().to("http://edm-dems-edge-adapter/courtFileCreated?number=${header.number}", "kafka:{{kafka.topic.name}}")
-    //.to("kafka:{{kafka.topic.name}}");
-    ;
+    .to("kafka:{{kafka.topic.name}}");
   }
 }
