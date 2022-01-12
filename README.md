@@ -56,16 +56,21 @@ Note: Need to run this in a real Linux shell; e.g. a Windows Subsystem for Linux
 # POC Scope
 ![](/img/dems-integration-context-diagram.png)
 
-This POC will implement a simple set of evidance and disclosure management services.  Specifically, the POC will cover the following two services:
+This POC will implement a simple set of court case management (CCM) services.  Specifically, the POC will cover the following two services:
 - Notification Service
 - Lookup Service
 
 
-# Components
-- ccm-justin-mock-app
-- ccm-justin-utility-adapter
-- ccm-notification-service
-- ccm-lookup-service
-- ccm-dems-edge-adapter
-- ccm-dems-mock-app
-- cmn-kafka
+# Integration Components Included in the POC
+
+The POC is comprised of the following integration and common components
+
+| Component ID | Component Description | Integration Component Type |
+| ------------ | --------------------- | -------------------------- |
+| ccm-justin-mock-app | CCM JUSTIN Mock Application | Mock Enterprise Application |
+| ccm-justin-utility-adapter | CCM JUSTIN Utility Adapter | Enterprise Application Integration Outbound Interface |
+| ccm-dems-edge-adapter | CCM DEMS Edge Adapter | Enterprise Application Integration Inbound Gateway Interface |
+| ccm-dems-mock-app | CCM DEMS Mock Application | Mock Enterprise Application |
+| ccm-notification-service | CCM Notification Service | Domain Stream Processor |
+| ccm-lookup-service | CCM Lookup Service | Domain API Interface |
+| cmn-kafka | Common Kafka Event Server | Common Service |
