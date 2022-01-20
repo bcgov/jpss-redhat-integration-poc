@@ -44,7 +44,7 @@
                         <mxPoint x="-54" y="-21" as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="16" value="Get&lt;br style=&quot;font-size: 14px;&quot;&gt;Court Case&lt;br style=&quot;font-size: 14px;&quot;&gt;Details" style="edgeStyle=none;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeColor=#000000;exitX=0.75;exitY=0;exitDx=0;exitDy=0;labelBackgroundColor=none;fontColor=#000000;fontSize=14;" parent="1" source="12" target="15" edge="1">
+                <mxCell id="16" value="Get&lt;br style=&quot;font-size: 14px&quot;&gt;Accused&lt;br&gt;History" style="edgeStyle=none;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeColor=#000000;exitX=0.75;exitY=0;exitDx=0;exitDy=0;labelBackgroundColor=none;fontColor=#000000;fontSize=14;" parent="1" source="12" target="15" edge="1">
                     <mxGeometry x="0.4853" y="-37" relative="1" as="geometry">
                         <mxPoint as="offset"/>
                     </mxGeometry>
@@ -65,7 +65,7 @@
                 <mxCell id="12" value="&amp;nbsp; &amp;nbsp;DEMS&lt;br&gt;&amp;nbsp; &amp;nbsp;Edge&lt;br&gt;&amp;nbsp; &amp;nbsp;Adapter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#000000;align=left;" parent="1" vertex="1">
                     <mxGeometry x="693" y="606" width="140" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="17" value="Get&lt;br style=&quot;font-size: 14px;&quot;&gt;Court Case&lt;br style=&quot;font-size: 14px;&quot;&gt;Details" style="edgeStyle=none;html=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;strokeColor=#000000;labelBackgroundColor=none;fontColor=#000000;fontSize=14;" parent="1" source="15" target="8" edge="1">
+                <mxCell id="17" value="Get&lt;br style=&quot;font-size: 14px&quot;&gt;Accused&lt;br&gt;History" style="edgeStyle=none;html=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;strokeColor=#000000;labelBackgroundColor=none;fontColor=#000000;fontSize=14;" parent="1" source="15" target="8" edge="1">
                     <mxGeometry x="-0.4201" y="-40" relative="1" as="geometry">
                         <mxPoint as="offset"/>
                     </mxGeometry>
