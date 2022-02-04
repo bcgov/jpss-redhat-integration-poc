@@ -19,7 +19,7 @@ public class CcmNotificationService extends RouteBuilder {
     .log("    with the offset ${headers[kafka.OFFSET]}")
     .log("    with the key ${headers[kafka.KEY]}")
     .unmarshal().json()
-    .transform(simple("{'type': 'courtcase', 'number': '${body[number]}', 'status': 'created', 'created_datetime': '${body[created_datetime]}'}"))
+    .transform(simple("{\"type\": \"courtcase\", \"number\": \"${body[number]}\", \"status\": \"created\", \"public_content\": \"${body[public_content]}\", \"created_datetime\": \"${body[created_datetime]}\"}"))
     .log("body (after unmarshalling): '${body}'")
     .to("kafka:{{kafka.topic.kpis.name}}");
   }

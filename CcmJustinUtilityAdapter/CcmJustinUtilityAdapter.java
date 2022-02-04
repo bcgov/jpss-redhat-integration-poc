@@ -16,22 +16,13 @@ public class CcmJustinUtilityAdapter extends RouteBuilder {
   public void configure() throws Exception {
     from("platform-http:/courtFileCreated?httpMethodRestrict=POST")
     .routeId("courtFileCreated")
-    //.setHeader(Exchange.HTTP_METHOD, simple("GET"))
-    //.to("rest:get:/createCourtFile?number=${header.number}");
     .removeHeader("CamelHttpUri")
     .removeHeader("CamelHttpBaseUri")
     .removeHeaders("CamelHttp*")
-    //.to("http://edm-dems-mock-app/createCourtfile?number=${header.number}");
-    // test comment
-    //
     .log("body (before unmarshalling): '${body}'")
     .unmarshal().json()
-    .transform(simple("{\"number\": \"${body[number]}\", \"status\": \"created\", \"created_datetime\": \"${body[created_datetime]}\"}"))
+    .transform(simple("{\"number\": \"${body[number]}\", \"status\": \"created\", \"sensitive_content\": \"${body[sensitive_content]}\", \"public_content\": \"${body[public_content]}\", \"created_datetime\": \"${body[created_datetime]}\"}"))
     .log("body (after unmarshalling): '${body}'")
-    //.log("body.court_file_number: '${body.court_file_number}'")
-    //.to("rest:get:/createCourtFile?number=${header.number}")
-    // https://camel.apache.org/manual/faq/how-to-send-the-same-message-to-multiple-endpoints.html
-    //.multicast().to("http://edm-dems-edge-adapter/courtFileCreated?number=${header.number}", "kafka:{{kafka.topic.name}}")
     .to("kafka:{{kafka.topic.name}}");
   }
 }

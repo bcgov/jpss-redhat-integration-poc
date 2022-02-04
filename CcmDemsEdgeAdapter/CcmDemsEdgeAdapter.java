@@ -25,9 +25,6 @@ public class CcmDemsEdgeAdapter extends RouteBuilder {
     .log("    with the key ${headers[kafka.KEY]}")
     .unmarshal().json()
     .setHeader(Exchange.HTTP_METHOD, simple("GET"))
-    //.to("rest:get:/createCourtFile?number=${header.number}");
-    //.to("rest:get:/createCourtFile?number=${header.number}")
-    // https://camel.apache.org/manual/faq/how-to-send-the-same-message-to-multiple-endpoints.html
     .setProperty("number").simple("${body[number]}")
     .setHeader("number").simple("${body[number]}")
     .to("http://ccm-dems-mock-app/createCourtCase");
