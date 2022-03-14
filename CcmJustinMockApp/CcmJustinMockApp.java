@@ -15,21 +15,11 @@ import org.apache.camel.builder.RouteBuilder;
 public class CcmJustinMockApp extends RouteBuilder {
   @Override
   public void configure() throws Exception {
-    // from("platform-http:/createCourtFile?httpMethodRestrict=GET")
-    // .setBody()
-    // .simple("{'court_file_number': '${header.number}'}")
-    // .to("log:info");
-
-    //restConfiguration().host("edm-dems-mock-app").port(80);
-
     from("platform-http:/courtFileCreated?httpMethodRestrict=GET")
     .routeId("courtFileCreated")
-    //.to("rest:get:/createCourtFile?number=${header.number}");
     .removeHeader("CamelHttpUri")
     .removeHeader("CamelHttpBaseUri")
     .removeHeaders("CamelHttp*")
-    //.to("http://edm-dems-mock-app/createCourtfile?number=${header.number}");
-    // test comment
     .setProperty("number").simple("${header.number}")
     .process(new Processor() {
       public void process(Exchange ex) {
@@ -39,13 +29,11 @@ public class CcmJustinMockApp extends RouteBuilder {
         ex.getIn().setHeader("created_datetime", createdCal.getTime());
       }
     })
-    //.setBody().simple("{'number': '${exchangeProperty.number}', 'created_datetime': '${date:header.created_datetime:yyyy-mm-dd}', 'approved_datetime': '${date:header.approved_datetime:yyyy-mm-dd}'}")
-    .setBody().simple("{\"number\": \"${exchangeProperty.number}\", \"created_datetime\": \"${date:header.created_datetime:yyyy-MM-dd'T'HH:mm:ssX}\"}")
-    //.to("rest:get:/createCourtFile?number=${header.number}")
-    // https://camel.apache.org/manual/faq/how-to-send-the-same-message-to-multiple-endpoints.html
-    //.multicast().to("http://edm-justin-utility-adapter/courtFileCreated?number=${header.number}", "http://edm-dems-mock-app/createCourtFile?number=${header.number}")
+    .setBody().simple("{\"number\": \"${exchangeProperty.number}\", \"sensitive_content\": \"Shh... this is the secret.\", \"public_content\": \"This is a mock event object.\", \"created_datetime\": \"${date:header.created_datetime:yyyy-MM-dd'T'HH:mm:ssX}\"}")
     .setHeader(Exchange.HTTP_METHOD, simple("POST"))
     .to("http://ccm-justin-utility-adapter/courtFileCreated")
-    .log("Newly generated court file: ${body}");
+    .setBody().simple("Successfully generated new court file: number=${exchangeProperty.number}.")
+    //.log("Newly generated court file: ${body}");
+    .log("${body}");
   }
 }
