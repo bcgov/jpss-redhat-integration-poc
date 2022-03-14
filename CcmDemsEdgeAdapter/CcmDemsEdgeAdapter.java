@@ -24,9 +24,10 @@ public class CcmDemsEdgeAdapter extends RouteBuilder {
     .log("    with the offset ${headers[kafka.OFFSET]}")
     .log("    with the key ${headers[kafka.KEY]}")
     .unmarshal().json()
-    .setHeader(Exchange.HTTP_METHOD, simple("GET"))
-    .setProperty("number").simple("${body[number]}")
-    .setHeader("number").simple("${body[number]}")
-    .to("http://ccm-dems-mock-app/createCourtCase");
+    .setBody().simple("{\"number\": \"${exchangeProperty.number}\", \"sensitive_content\": \"Shh... this is the secret.\", \"public_content\": \"This is a mock event object.\", \"created_datetime\": \"${date:header.created_datetime:yyyy-MM-dd'T'HH:mm:ssX}\"}")
+    .setHeader(Exchange.HTTP_METHOD, simple("POST"))
+    .to("http://ccm-dems-mock-app/createCourtCase")
+    .setBody().simple("Successfully created new court case in DEMS mock app: number=${exchangeProperty.number}.")
+    .log("${body}");
   }
 }
