@@ -41,7 +41,7 @@ spec:
       deleteClaim: true
       size: 5Gi
       type: persistent-claim
-      class: netapp-file-encrypted
+      class: netapp-file-standard
     template:
       statefulset:
         metadata:
@@ -63,7 +63,7 @@ spec:
       deleteClaim: false
       size: 1Gi
       type: persistent-claim
-      class: netapp-file-encrypted
+      class: netapp-file-standard
     template:
       statefulset:
         metadata:
