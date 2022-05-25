@@ -1,3 +1,5 @@
+[![Lifecycle:Dormant](https://img.shields.io/badge/Lifecycle-Dormant-ff7f2a)](<Redirect-URL>)
+
 # jpss-red-hat-integration-poc
 Justice and Public Safety Sector Red Hat Integration POC repository
 
