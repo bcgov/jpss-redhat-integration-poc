@@ -81,7 +81,7 @@ Below is the system context diagram for the DEMS Integration POC where the follo
   - KPIs (no personal information)
   - Audits
 
-![](/img/system_context_diagram.png)
+![](/img/poc-system_context_diagram.png)
 
 # Integration Components Included in the POC
 
